@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const { STRING } = Sequelize;
 
-const db = new Sequelize('postgres://localhost/acme_corp_management_db');
+const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_corp_management_db');
 
 const User = db.define('user', {
     name : {
@@ -34,10 +34,6 @@ Department.prototype.isManaged = function(){
     else
     return 'not managed'
 }
-
-
-
-
 
 const syncAndSeed = async() => {
         await db.sync({ force : true });

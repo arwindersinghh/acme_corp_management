@@ -43,7 +43,6 @@ app.get('/', async(req, res, next)=> {
                 departments.map( department => `
                 <li> 
                 ${department.name} ${department.isManaged()}
-                ************************* 
                 <form method='POST' action='/departments/${department.id}?_method=PUT'>
                     <select name='managerId'>
                         <option value=''>--- not managed ---</option>
@@ -55,7 +54,6 @@ app.get('/', async(req, res, next)=> {
                     </select>
                     <button>Save</button>
                 </form>
-                ************************
                 </li>
                 `).join('')
             }
@@ -94,7 +92,7 @@ app.get('/', async(req, res, next)=> {
 const start = async(req, res, next) => {
     try{
     await syncAndSeed() 
-    const port = 3000;
+    const port = process.env.PORT || 3000;
     app.listen(port, () => {
         console.log(`we listenin on port ${port}`)
     })
